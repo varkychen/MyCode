@@ -15,6 +15,5 @@ for i in range(1,n):
         else:
             a[j] = to_insert
             break
-    print "after loop j:", j
     print "Intermediate array", i, ":", a
 print a
