@@ -7,13 +7,10 @@ print "Sort a sample of", n, "elements in ascending order. Input array:", a
 
 for i in range(1,n):
     to_insert = a[i]
-    for j in range(i, -1, -1):
-        if j == 0:
-            a[j] = to_insert
-        elif a[j-1] > to_insert:
-            a[j] = a[j-1]
-        else:
-            a[j] = to_insert
-            break
+    j = i
+    while j > 0 and a[j-1] > to_insert:
+        a[j] = a[j-1]
+        j -= 1
+    a[j] = to_insert
     print "Intermediate array", i, ":", a
-print a
+print a 
