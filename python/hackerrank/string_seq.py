@@ -3,9 +3,9 @@ def encode_string(input):
     output_string = ''
     for i in range(len(input)):
         if input[start] != input[i]:
-            output_string += str(len(input[start:i])) + input[start]
+            output_string += str(i - start) + input[start]
             start = i
-    output_string += str(len(input[start:])) + input[start]
+    output_string += str(len(input) - start) + input[start]
     return output_string
     
 print encode_string('aaaaabbbbccccccaaaaaaa')
