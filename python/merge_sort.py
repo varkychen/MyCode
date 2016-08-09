@@ -14,7 +14,7 @@ def merge(x, y):
         elif x[i] < y[j]:
             result.append(x[i])
             i += 1
-        elif i == len(x) or y[j] < x[i]:
+        elif y[j] < x[i]:
             result.append(y[j])
             j += 1
     return result
