@@ -4,7 +4,7 @@ Algorithms - Design and Analysis Course I
 Contains
 
 1. Count Inversions  
-  Given a set of numbers, find out the number of inversions, i.e. - Find out number of pair of numbers that are not in sorted in ascending order 
+  Given a set of numbers, find out the number of inversions, i.e. - Find out number of pair of numbers that are not in sorted in ascending order  
   Reads the numbers from IntegerArray.txt, then calculates inversions.  
 
 2. Closest Pair  
