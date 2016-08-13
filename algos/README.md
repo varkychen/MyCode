@@ -5,6 +5,7 @@ Contains
 
 1. Count Inversions  
   Given a set of numbers, find out the number of inversions, i.e. - Find out number of pair of numbers that are not in sorted in ascending order 
+  Reads the numbers from IntegerArray.txt, then calculates inversions.  
 
 2. Closest Pair  
   From a set of points find the pair having the least euclidean distance. Provides both a O(n^2) and O(nlogn) implementations.
