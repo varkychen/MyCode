@@ -41,7 +41,18 @@ public class LinkedList<T> {
 
         StringBuffer buffer = new StringBuffer();
         Node<T> item = root;
-        while (item.getNext() != null) {
+        Node<T> loopStart = loopStartNode();
+        boolean first = false;
+
+        while (item != null) {
+            if (first && item == loopStart) {
+                buffer.append(item);
+                return buffer.toString();
+            }
+
+            if (!first && item == loopStart)
+                first = true;
+
             buffer.append(item + "->");
             item = item.getNext();
         }
@@ -65,5 +76,26 @@ public class LinkedList<T> {
     private void ensureNotEmpty() {
         if (root == null)
             throw new IllegalStateException("List is empty !!");
+    }
+
+    public boolean hasLoop() {
+        return loopStartNode() != null;
+    }
+
+    private Node<T> loopStartNode() {
+        Node<T> oneStep = root;
+        if (root == null)
+            return null;
+
+        Node<T> twoStep = oneStep.getNext();
+        while (twoStep != null && oneStep != twoStep) {
+            oneStep = oneStep.getNext();
+
+            if (twoStep.getNext() == null)
+                return null;
+
+            twoStep = twoStep.getNext().getNext();
+        }
+        return (twoStep == oneStep ? oneStep : twoStep);
     }
 }
