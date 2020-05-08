@@ -1,5 +1,8 @@
 package linked.lists;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
+
 public class LinkedList<T> {
     private Node<T> root;
 
@@ -41,7 +44,7 @@ public class LinkedList<T> {
 
         StringBuffer buffer = new StringBuffer();
         Node<T> item = root;
-        Node<T> loopStart = loopStartNode();
+        Node<T> loopStart = fetchLoopStart();
         boolean first = false;
 
         while (item != null) {
@@ -79,23 +82,21 @@ public class LinkedList<T> {
     }
 
     public boolean hasLoop() {
-        return loopStartNode() != null;
+        return fetchLoopStart() != null;
     }
 
-    private Node<T> loopStartNode() {
+    private Node<T> fetchLoopStart() {
+        Map<Node<T>, Integer> map = new IdentityHashMap<>();
+
         Node<T> oneStep = root;
-        if (root == null)
-            return null;
-
-        Node<T> twoStep = oneStep.getNext();
-        while (twoStep != null && oneStep != twoStep) {
-            oneStep = oneStep.getNext();
-
-            if (twoStep.getNext() == null)
-                return null;
-
-            twoStep = twoStep.getNext().getNext();
+        while (oneStep != null) {
+            int value = map.merge(oneStep, 1, Integer::sum);
+            if (value == 2)
+                return oneStep;
+            else
+                oneStep = oneStep.getNext();
         }
-        return (twoStep == oneStep ? oneStep : twoStep);
+
+        return null;
     }
 }
