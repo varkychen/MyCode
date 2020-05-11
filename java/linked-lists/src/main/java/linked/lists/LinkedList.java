@@ -86,17 +86,31 @@ public class LinkedList<T> {
     }
 
     private Node<T> fetchLoopStart() {
-        Map<Node<T>, Integer> map = new IdentityHashMap<>();
+        /**
+         * Floyd's algorithm: If there is no loop, hare will encounter the end first.
+         * 
+         * If a loop exists, let the start of the loop be at mu, length of the loop be
+         * l. On moving hare twice as fast as tortoise, eventually hare and tortoise
+         * will point to the same element. Let the distance from beginning to the
+         * tortoise be v. Thus, distance from beginning to the hare will be 2v. v will
+         * be a multiple of l as will 2v.
+         * 
+         * If we now reset the tortoise to the start, and move both tortoise and hare
+         * one step at-a-time, the two will eventually meet at mu.
+         */
+        Node<T> tortoise = root, hare = root;
+        do {
+            if (hare == null || hare.getNext() == null)
+                return null;
+            tortoise = tortoise.getNext();
+            hare = hare.getNext().getNext();
+        } while (tortoise != hare);
 
-        Node<T> oneStep = root;
-        while (oneStep != null) {
-            int value = map.merge(oneStep, 1, Integer::sum);
-            if (value == 2)
-                return oneStep;
-            else
-                oneStep = oneStep.getNext();
+        tortoise = root;
+        while (tortoise != hare) {
+            tortoise = tortoise.getNext();
+            hare = hare.getNext();
         }
-
-        return null;
+        return tortoise;
     }
 }
