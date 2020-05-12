@@ -1,8 +1,5 @@
 package linked.lists;
 
-import java.util.IdentityHashMap;
-import java.util.Map;
-
 public class LinkedList<T> {
     private Node<T> root;
 
@@ -112,5 +109,26 @@ public class LinkedList<T> {
             hare = hare.getNext();
         }
         return tortoise;
+    }
+
+    public void reverse() {
+        Node<T> a = root.getNext();
+
+        // If linked list has only one item, reverse is the same list
+        // Else start reversing from root itself.
+        if (a != null) {
+            Node<T> b = a.getNext();
+            root.setNext(null);
+            do {
+                a.setNext(root);
+                root = a;
+
+                if (b == null)
+                    break;
+
+                a = b;
+                b = b.getNext();
+            } while (true);
+        }
     }
 }
