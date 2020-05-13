@@ -1,6 +1,5 @@
 package collections;
 
-public enum Reverse {
+public enum ReverseType {
     RECURSIVE
-
 }

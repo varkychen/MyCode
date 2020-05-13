@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import linked.lists.Node;
 
-import static collections.Reverse.RECURSIVE;
+import static collections.ReverseType.RECURSIVE;
 
 public class CollectionUtilsTest {
 

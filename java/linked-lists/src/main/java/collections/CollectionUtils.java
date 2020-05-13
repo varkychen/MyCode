@@ -4,7 +4,7 @@ import linked.lists.Node;
 
 public class CollectionUtils {
 
-    public <T> Node<T> reverse(Node<T> root, Reverse type) {
+    public <T> Node<T> reverse(Node<T> root, ReverseType type) {
         if (root == null || root.getNext() == null)
             return root;
         else {
