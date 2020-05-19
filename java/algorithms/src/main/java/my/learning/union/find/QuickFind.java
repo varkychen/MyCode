@@ -1,6 +1,6 @@
 package my.learning.union.find;
 
-public class QuickFind {
+public class QuickFind implements UnionFind {
 
     int[] data;
 
@@ -19,6 +19,7 @@ public class QuickFind {
      * 
      * @param q Cell q
      */
+    @Override
     public void union(int p, int q) {
         int pid = data[p];
         for (int i = 0; i < data.length; i++) {
@@ -34,6 +35,7 @@ public class QuickFind {
      * 
      * @param q Cell q
      */
+    @Override
     public boolean isConnected(int p, int q) {
         return data[p] == data[q];
     }
