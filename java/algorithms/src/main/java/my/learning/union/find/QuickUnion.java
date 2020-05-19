@@ -12,8 +12,9 @@ public class QuickUnion implements UnionFind {
 
     @Override
     public void union(int p, int q) {
-        int root = findRoot(p);
-        data[root] = q;
+        int rootp = findRoot(p);
+        int rootq = findRoot(q);
+        data[rootp] = rootq;
     }
 
     private int findRoot(int p) {
