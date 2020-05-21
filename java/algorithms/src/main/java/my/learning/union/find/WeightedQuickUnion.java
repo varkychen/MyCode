@@ -22,11 +22,11 @@ public class WeightedQuickUnion implements UnionFind {
      */
     @Override
     public void union(int p, int q) {
+        if (isConnected(p, q))
+            return;
+
         int proot = findRoot(p);
         int qroot = findRoot(q);
-
-        if (proot == qroot)
-            return;
 
         if (counts[proot] <= counts[qroot]) {
             data[proot] = qroot;
