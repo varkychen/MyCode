@@ -64,4 +64,26 @@ public class WeightedQuickUnionTest {
 
         assertTrue(unionFind.isConnected(9, 0));
     }
+
+    @Test
+    public void testUnionNineCellsAndNoActionUnion() {
+        WeightedQuickUnion unionFind = new WeightedQuickUnion(10);
+        unionFind.union(6, 1);
+        unionFind.union(6, 8);
+        unionFind.union(7, 2);
+        unionFind.union(5, 4);
+        unionFind.union(4, 7);
+        unionFind.union(6, 9);
+        unionFind.union(0, 3);
+        unionFind.union(3, 2);
+        unionFind.union(5, 8);
+        unionFind.union(8, 0);
+
+        int[] result = { 2, 2, 2, 2, 2, 2, 1, 2, 2, 1 };
+        int[] counts = { 1, 3, 10, 1, 1, 1, 1, 1, 1, 1 };
+        for (int i = 0; i < result.length; i++) {
+            assertEquals(result[i], unionFind.ancestor[i]);
+            assertEquals(counts[i], unionFind.counts[i]);
+        }
+    }
 }
