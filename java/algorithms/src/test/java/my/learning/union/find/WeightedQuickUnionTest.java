@@ -11,8 +11,8 @@ public class WeightedQuickUnionTest {
     public void testUnion() {
         WeightedQuickUnion unionFind = new WeightedQuickUnion(10);
         unionFind.union(6, 1);
-        assertEquals(1, unionFind.data[6]);
-        assertEquals(1, unionFind.data[1]);
+        assertEquals(1, unionFind.ancestor[6]);
+        assertEquals(1, unionFind.ancestor[1]);
     }
 
     @Test
@@ -20,9 +20,9 @@ public class WeightedQuickUnionTest {
         WeightedQuickUnion unionFind = new WeightedQuickUnion(10);
         unionFind.union(6, 1);
         unionFind.union(6, 8);
-        assertEquals(1, unionFind.data[6]);
-        assertEquals(1, unionFind.data[1]);
-        assertEquals(1, unionFind.data[8]);
+        assertEquals(1, unionFind.ancestor[6]);
+        assertEquals(1, unionFind.ancestor[1]);
+        assertEquals(1, unionFind.ancestor[8]);
         assertEquals(1, unionFind.counts[6]);
         assertEquals(3, unionFind.counts[1]);
         assertEquals(1, unionFind.counts[8]);
@@ -34,9 +34,9 @@ public class WeightedQuickUnionTest {
         unionFind.union(6, 1);
         unionFind.union(6, 8);
         unionFind.union(6, 8);
-        assertEquals(1, unionFind.data[6]);
-        assertEquals(1, unionFind.data[1]);
-        assertEquals(1, unionFind.data[8]);
+        assertEquals(1, unionFind.ancestor[6]);
+        assertEquals(1, unionFind.ancestor[1]);
+        assertEquals(1, unionFind.ancestor[8]);
         assertEquals(1, unionFind.counts[6]);
         assertEquals(3, unionFind.counts[1]);
         assertEquals(1, unionFind.counts[8]);
@@ -55,10 +55,10 @@ public class WeightedQuickUnionTest {
         unionFind.union(3, 2);
         unionFind.union(5, 8);
 
-        int[] result = { 3, 2, 2, 2, 2, 4, 1, 2, 1, 1 };
-        int[] counts = { 1, 4, 10, 2, 2, 1, 1, 1, 1, 1 };
+        int[] result = { 3, 2, 2, 2, 2, 2, 1, 2, 1, 1 };
+        int[] counts = { 1, 4, 10, 2, 1, 1, 1, 1, 1, 1 };
         for (int i = 0; i < result.length; i++) {
-            assertEquals(result[i], unionFind.data[i]);
+            assertEquals(result[i], unionFind.ancestor[i]);
             assertEquals(counts[i], unionFind.counts[i]);
         }
 

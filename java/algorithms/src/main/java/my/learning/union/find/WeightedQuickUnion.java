@@ -2,15 +2,15 @@ package my.learning.union.find;
 
 public class WeightedQuickUnion implements UnionFind {
 
-    public int[] data;
-    public int[] counts;
+    int[] ancestor;
+    int[] counts;
 
     public WeightedQuickUnion(int n) {
-        data = new int[n];
+        ancestor = new int[n];
         counts = new int[n];
 
         for (int i = 0; i < n; i++) {
-            data[i] = i;
+            ancestor[i] = i;
             counts[i] = 1;
         }
     }
@@ -29,10 +29,10 @@ public class WeightedQuickUnion implements UnionFind {
         int qroot = findRoot(q);
 
         if (counts[proot] <= counts[qroot]) {
-            data[proot] = qroot;
+            ancestor[proot] = qroot;
             counts[qroot] += counts[proot];
         } else {
-            data[qroot] = proot;
+            ancestor[qroot] = proot;
             counts[proot] += counts[qroot];
         }
     }
@@ -41,9 +41,20 @@ public class WeightedQuickUnion implements UnionFind {
      * Find root of element. If an item index are the same, then it's a root.
      */
     private int findRoot(int p) {
-        while (data[p] != p)
-            p = data[p];
-        return p;
+        int root = p;
+        while (ancestor[root] != root)
+            root = ancestor[root];
+
+        // Path compression
+        int parent = ancestor[p];
+        while (ancestor[parent] != parent) {
+            ancestor[p] = root;
+            counts[parent] -= counts[p];
+            p = parent;
+            parent = ancestor[parent];
+        }
+
+        return root;
     }
 
     /**
