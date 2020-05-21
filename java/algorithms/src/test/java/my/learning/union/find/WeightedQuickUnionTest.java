@@ -16,9 +16,23 @@ public class WeightedQuickUnionTest {
     }
 
     @Test
-    public void testUnionTwoCells() {
+    public void testUnionThreeCells() {
         WeightedQuickUnion unionFind = new WeightedQuickUnion(10);
         unionFind.union(6, 1);
+        unionFind.union(6, 8);
+        assertEquals(1, unionFind.data[6]);
+        assertEquals(1, unionFind.data[1]);
+        assertEquals(1, unionFind.data[8]);
+        assertEquals(1, unionFind.counts[6]);
+        assertEquals(3, unionFind.counts[1]);
+        assertEquals(1, unionFind.counts[8]);
+    }
+
+    @Test
+    public void testUnionThreeCellsWithRepitition() {
+        WeightedQuickUnion unionFind = new WeightedQuickUnion(10);
+        unionFind.union(6, 1);
+        unionFind.union(6, 8);
         unionFind.union(6, 8);
         assertEquals(1, unionFind.data[6]);
         assertEquals(1, unionFind.data[1]);
